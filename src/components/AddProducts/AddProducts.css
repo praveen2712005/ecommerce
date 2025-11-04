@@ -1,0 +1,219 @@
+.add-products {
+  width: 100%;
+  height: 100vh;
+  margin: 30px auto;
+  padding: 40px;
+  background-color: black;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-products::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%);
+  background-size: 20px 20px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+.add-products h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.add-products h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(135deg, #fff, #e0e0e0);
+  border-radius: 2px;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.product-form input {
+  padding: 16px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.product-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.product-form input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+
+/* File input specific styling */
+.product-form input[type="file"] {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-form input[type="file"]::file-selector-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+}
+
+.product-form input[type="file"]::file-selector-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.product-form input[type="file"]:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Number input specific styling */
+.product-form input[type="number"] {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.product-form input[type="number"]::placeholder {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: normal;
+}
+
+/* Submit button */
+.product-form button {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+}
+
+.product-form button:hover {
+  background: linear-gradient(135deg, #44a08d, #3a8d7a);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(78, 205, 196, 0.4);
+}
+
+.product-form button:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Form icon */
+.add-products::after {
+  content: '📦';
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .add-products {
+    margin: 20px;
+    padding: 30px 25px;
+  }
+  
+  .add-products h2 {
+    font-size: 1.8rem;
+  }
+  
+  .product-form {
+    padding: 25px 20px;
+  }
+  
+  .add-products::after {
+    position: relative;
+    top: 0;
+    right: 0;
+    display: block;
+    width: fit-content;
+    margin: -20px auto 20px;
+  }
+  
+  .product-form input {
+    padding: 14px 16px;
+  }
+  
+  .product-form button {
+    padding: 16px 25px;
+  }
+}
+
+/* Input focus animations */
+@keyframes inputFocus {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.product-form input:focus {
+  animation: inputFocus 0.3s ease;
+}

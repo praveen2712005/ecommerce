@@ -1,0 +1,205 @@
+.orders {
+  width: 100%;
+  height: 100vh;
+  margin: 30px auto;
+  padding: 40px;
+  background-color: black;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.orders::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%);
+  background-size: 20px 20px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+.orders h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.orders h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #fff, #e0e0e0);
+  border-radius: 2px;
+}
+
+.orders table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.orders thead {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.orders th {
+  padding: 20px 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.orders td {
+  padding: 18px 15px;
+  font-weight: 500;
+  color: #e0e0e0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.orders tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.orders tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+  color: #fff;
+}
+
+/* Order ID styling */
+.orders td:first-child {
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+
+/* Status badge styling */
+.orders td:last-child {
+  font-weight: 600;
+  border-radius: 20px;
+  margin: 0 10px;
+  padding: 8px 16px;
+  display: inline-block;
+}
+
+.orders td:last-child {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  text-align: center;
+}
+
+/* Specific status colors */
+.orders tr:nth-child(1) td:last-child {
+  background: rgba(76, 175, 80, 0.3);
+  color: #a5d6a7;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.orders tr:nth-child(2) td:last-child {
+  background: rgba(255, 152, 0, 0.3);
+  color: #ffcc80;
+  border: 1px solid rgba(255, 152, 0, 0.5);
+}
+
+/* Total amount styling */
+.orders td:nth-child(3) {
+  font-weight: 700;
+  color: #4ecdc4;
+  font-size: 1.1rem;
+}
+
+/* Orders count badge */
+.orders::after {
+  content: '2 Orders';
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .orders {
+    margin: 20px;
+    padding: 30px 20px;
+  }
+  
+  .orders h2 {
+    font-size: 1.8rem;
+  }
+  
+  .orders::after {
+    position: relative;
+    top: 0;
+    right: 0;
+    display: block;
+    width: fit-content;
+    margin: -20px auto 20px;
+  }
+  
+  .orders table {
+    font-size: 0.9rem;
+  }
+  
+  .orders th,
+  .orders td {
+    padding: 12px 8px;
+  }
+  
+  .orders th:nth-child(2),
+  .orders td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .orders {
+    padding: 20px 15px;
+  }
+  
+  .orders table {
+    font-size: 0.8rem;
+  }
+  
+  .orders th,
+  .orders td {
+    padding: 10px 5px;
+  }
+}
