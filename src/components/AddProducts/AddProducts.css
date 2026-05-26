@@ -1,10 +1,11 @@
+/* AddProducts.css - Updated for File Upload */
+
 .add-products {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 30px auto;
   padding: 40px;
   background-color: black;
-  border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -64,9 +65,11 @@
   padding: 30px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.product-form input {
+.product-form input:not([type="file"]) {
   padding: 16px 20px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
@@ -81,7 +84,7 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-.product-form input:focus {
+.product-form input:not([type="file"]):focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.15);
@@ -89,48 +92,129 @@
   transform: scale(1.02);
 }
 
-/* File input specific styling */
-.product-form input[type="file"] {
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.15);
+/* Custom File Input Styling */
+.file-input-wrapper {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  margin: 10px 0;
+}
+
+.file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-input-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 94%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.08);
   border: 2px dashed rgba(255, 255, 255, 0.3);
-  text-align: center;
-  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
-.product-form input[type="file"]::file-selector-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+.file-input:hover + .file-input-label,
+.file-input:focus + .file-input-label {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.file-icon {
+  font-size: 1.5rem;
   margin-right: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: 500;
+  opacity: 0.8;
 }
 
-.product-form input[type="file"]::file-selector-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+.file-text {
+  flex-grow: 1;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.file-browse {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.file-input:hover + .file-input-label .file-browse,
+.file-input:focus + .file-input-label .file-browse {
+  background: linear-gradient(135deg, #44a08d, #3a8d7a);
   transform: scale(1.05);
 }
 
-.product-form input[type="file"]:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.2);
+/* Image Preview */
+.image-preview-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.5s ease;
 }
 
-/* Number input specific styling */
-.product-form input[type="number"] {
-  font-family: 'Courier New', monospace;
-  font-weight: 600;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.product-form input[type="number"]::placeholder {
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: normal;
+.image-preview-label {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.image-preview {
+  width: 100%;
+  max-width: 300px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-preview:hover img {
+  transform: scale(1.05);
 }
 
 /* Submit button */
@@ -144,7 +228,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin-top: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
@@ -175,7 +259,7 @@
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .add-products {
     margin: 20px;
     padding: 30px 25px;
@@ -198,12 +282,61 @@
     margin: -20px auto 20px;
   }
   
-  .product-form input {
+  .product-form input:not([type="file"]) {
     padding: 14px 16px;
+  }
+  
+  .file-input-label {
+    padding: 0 15px;
+  }
+  
+  .file-text {
+    font-size: 0.9rem;
+  }
+  
+  .file-browse {
+    padding: 6px 15px;
+    font-size: 0.85rem;
+  }
+  
+  .image-preview {
+    max-width: 250px;
+    height: 150px;
   }
   
   .product-form button {
     padding: 16px 25px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-products {
+    padding: 20px 15px;
+  }
+  
+  .file-input-label {
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    height: auto;
+    min-height: 100px;
+  }
+  
+  .file-icon {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .file-text {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-right: 0;
+  }
+  
+  .image-preview {
+    max-width: 200px;
+    height: 120px;
   }
 }
 
@@ -216,4 +349,27 @@
 
 .product-form input:focus {
   animation: inputFocus 0.3s ease;
+}
+
+/* File size warning */
+.file-size-warning {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.category-select {
+  padding: 16px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.category-select option {
+  background:black;
 }

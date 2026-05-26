@@ -1,9 +1,49 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import './ViewProducts.css'
+import Axios from '../../axios/axios'
+import Form from '../Form/Form'
 
-export default class ViewProducts extends Component {
-  render() {
-    return (
+export default function Viewproducts() {
+
+  const [items, setItems] = useState([]);
+  const [openform, setOpenform] = useState(false);
+  const [selectdata,setSelectdata]=useState([])
+
+   useEffect(()=>{
+    async function fetchProducts(){
+      try {
+        const item= await Axios.get('/viewproduct')
+        console.log("Products fetched:", item.data);
+        setItems(item.data)
+      } catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    }
+    fetchProducts()
+   },[])
+
+  async function deleteProduct(id){
+  try {
+    console.log(id, " product_id");
+    const deleteproduct = await Axios.delete(`/deleteproduct/${id}`); 
+    console.log("Product deleted:", deleteproduct);
+    setItems(items.filter((product) => product._id !== id));
+    
+  } catch (error) {
+    console.log("Error deleting product:", error);
+  }
+}
+async function editProduct(id, updatedProduct){
+  try {
+    console.log(id)
+     setSelectdata(updatedProduct);
+     setOpenform(true);
+  } catch (error) {
+    console.log("Error editing product:", error);
+  }
+}
+
+  return (
       <div className="view-products">
         <div className="products-header">
           <h1>View Products</h1>
@@ -11,88 +51,27 @@ export default class ViewProducts extends Component {
         </div>
 
         <div className="products-grid">
-          {/* Product Card 1 */}
-          <div className="product-card">
-            <div className="product-image">
-              <img src="https://png.pngtree.com/png-vector/20250321/ourmid/pngtree-wireless-headphone-png-image_15830312.png" alt="Product" />
-            </div>
-            <div className="product-info">
-              <h3>Wireless Headphones</h3>
-              <p className="product-category">Electronics</p>
-              <p className="product-price">$129.99</p>
-              <span className="stock-status in-stock">In Stock</span>
-            </div>
-            <div className="product-actions">
-              <button className="btn-view" onClick={() => alert('View details clicked')}>
-                👁️ View Details
-              </button>
-              <button className="btn-edit" onClick={() => alert('Edit clicked')}>
-                ✏️ Edit
-              </button>
-              <button className="btn-track" onClick={() => alert('Track order clicked')}>
-                📦 Track Order
-              </button>
-              <button className="btn-delete" onClick={() => alert('Delete clicked')}>
-                🗑️ Delete
-              </button>
-            </div>
-          </div>
+        {items.map((item) => (
+            <div className="product-card" key={item._id}>
+            <h3 className="product-name">{item.name}</h3>
+            <p className="product-price">Price: ${item.price}</p>
+            <p className="product-category">Category: {item.category}</p>
+            <p className="product-description">{item.description}</p>
+            <button onClick={() => deleteProduct(item._id)}>Delete</button>
+            <button onClick={() => { editProduct(item._id,item); }}>Edit</button>
+           
+  </div>
+))}
 
-          {/* Product Card 2 */}
-          <div className="product-card">
-            <div className="product-image">
-              <img src="https://png.pngtree.com/png-vector/20240125/ourmid/pngtree-orange-office-chair-png-image_11548338.png" alt="Product" />
-            </div>
-            <div className="product-info">
-              <h3>Office Chair</h3>
-              <p className="product-category">Furniture</p>
-              <p className="product-price">$299.99</p>
-              <span className="stock-status low-stock">Low Stock</span>
-            </div>
-            <div className="product-actions">
-              <button className="btn-view" onClick={() => alert('View details clicked')}>
-                👁️ View Details
-              </button>
-              <button className="btn-edit" onClick={() => alert('Edit clicked')}>
-                ✏️ Edit
-              </button>
-              <button className="btn-track" onClick={() => alert('Track order clicked')}>
-                📦 Track Order
-              </button>
-              <button className="btn-delete" onClick={() => alert('Delete clicked')}>
-                🗑️ Delete
-              </button>
-            </div>
-          </div>
-
-          {/* Product Card 3 */}
-          <div className="product-card">
-            <div className="product-image">
-              <img src="https://png.pngtree.com/png-vector/20241025/ourmid/pngtree-smart-watch-png-image_14171827.png " alt="Product" />
-            </div>
-            <div className="product-info">
-              <h3>Smart Watch</h3>
-              <p className="product-category">Electronics</p>
-              <p className="product-price">$199.99</p>
-              <span className="stock-status out-of-stock">Out of Stock</span>
-            </div>
-            <div className="product-actions">
-              <button className="btn-view" onClick={() => alert('View details clicked')}>
-                👁️ View Details
-              </button>
-              <button className="btn-edit" onClick={() => alert('Edit clicked')}>
-                ✏️ Edit
-              </button>
-              <button className="btn-track" onClick={() => alert('Track order clicked')}>
-                📦 Track Order
-              </button>
-              <button className="btn-delete" onClick={() => alert('Delete clicked')}>
-                🗑️ Delete
-              </button>
-            </div>
-          </div>
-        </div>
+       
+        {openform ? <Form 
+        selectdata={selectdata}
+        openform={openform}
+        setOpenform={setOpenform}
+        /> : ""}
+      
       </div>
+      </div>
+     
     )
   }
-}

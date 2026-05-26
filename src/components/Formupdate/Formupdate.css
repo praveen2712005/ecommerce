@@ -1,0 +1,129 @@
+/* Formupdate.css */
+
+.edit-form {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #e1e5e9;
+}
+
+.edit-form h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 1rem;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 1.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  color: #374151;
+}
+
+.edit-form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: #ffffff;
+}
+
+.edit-form input:hover {
+  border-color: #9ca3af;
+}
+
+.edit-form input::placeholder {
+  color: #9ca3af;
+}
+
+.edit-form button {
+  width: 100%;
+  padding: 12px 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.edit-form button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.edit-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.edit-form button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Form animation */
+@keyframes subtleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.edit-form {
+  animation: subtleAppear 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .edit-form {
+    margin: 1rem;
+    padding: 2rem;
+  }
+  
+  .edit-form h2 {
+    font-size: 1.3rem;
+  }
+  
+  .edit-form input {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .edit-form button {
+    padding: 11px 14px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Optional: Add labels for better form structure */
+.edit-form input:not(:placeholder-shown) {
+  background: #fafbfc;
+}
+
+/* Focus states for accessibility */
+.edit-form input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
